@@ -40,20 +40,7 @@ footer {
     text-align: center;
 }
    
-.background-image-search {
-    background-size: cover;
-    background-image: url('../images/nqaliu.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: rgba(255, 255, 255, 0.7);
-    opacity: 0.9;
-    min-height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-}
+
 /* Import Font Dancing Script */
 @import url(https://fonts.googleapis.com/css?family=Dancing+Script);
 
