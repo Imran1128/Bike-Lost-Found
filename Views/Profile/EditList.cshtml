@@ -1,0 +1,76 @@
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+@model UpdateListViewModel
+
+@*@{
+    ViewData["Title"] = "EditList";
+    var CurrentUser = User.FindFirst("Id").Value;
+    var UserOfThisBike = ;
+}
+@if (CurrentUser == UserOfThisBike)
+{*@
+    <div class="container">
+        <h1>Edit List</h1>
+        <hr />
+        <form enctype="multipart/form-data" asp-action="EditList" asp-controller="Profile" method="post">
+            <div class="text-danger" asp-validation-summary="All"></div>
+        <div>
+            <label class="form-label" asp-for="OwnerName"></label>
+            <input class="form-control" asp-for="OwnerName" />
+            <span class="text-danger" asp-validation-for="OwnerName"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="OwnerEmail"></label>
+            <input class="form-control" asp-for="OwnerEmail" />
+            <span class="text-danger" asp-validation-for="OwnerEmail"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="OwnerPhone"></label>
+            <input class="form-control" asp-for="OwnerPhone" />
+            <span class="text-danger" asp-validation-for="OwnerPhone"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="BikeName"></label>
+            <input class="form-control" asp-for="BikeName" />
+            <span class="text-danger" asp-validation-for="BikeName"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="BikeRegNo"></label>
+            <input class="form-control" asp-for="BikeRegNo" />
+            <span class="text-danger" asp-validation-for="BikeRegNo"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="BikeSN"></label>
+            <input class="form-control" asp-for="BikeSN" />
+            <span class="text-danger" asp-validation-for="BikeSN"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="PlaceWhereLost"></label>
+            <input class="form-control" asp-for="PlaceWhereLost" />
+            <span class="text-danger" asp-validation-for="PlaceWhereLost"></span>
+        </div>
+            <div>
+                <label class="form-label" asp-for="BikePhoto"></label>
+                <input class="form-control-file" type="file" asp-for="BikePhoto" />
+                <span class="text-danger" asp-validation-for="BikePhoto"></span>
+            </div>
+        <div class="mt-2">
+            
+                <input class="form-check-inline" asp-for="IsFound" />
+                <label class="form-label text-danger" asp-for="IsFound">Click the checkbox if the bike is found.</label>
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-primary" type="submit">Update</button>
+                <a class="btn btn-info" asp-action="Mylist" asp-controller="Profile">Cancel</a>
+            </div>
+        
+
+        </form>
+    </div>
+@*}
+else
+{
+    <h1>Wrong User</h1>
+}*@
+
+
+

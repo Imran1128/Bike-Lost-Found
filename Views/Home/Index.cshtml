@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Razor.Language
+@model LostAndFoundBikeInformation
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class=" text-light text-center bg-light background-image">
+    <h1>Report Your Lost Bike</h1>
+    <h1>&</h1>
+    <h1>Help Others to Find Their Bikes</h1>
+    <a asp-action="Create" asp-controller="Home" class="btn btn-primary border-4 mt-5 text-light fw-bolder">Report The Bike You Lost Or Found</a>
+</div>
+<div class=" bg-white ">
+    <div class="container text-center " style="padding-top:70px;padding-bottom:70px">
+        <h2 class="text-dark fw-bolder">Search By Bike's Registration Number</h2>
+        <p class="text-dark font-italic mb-4">See If Someone has Posted About Your Bike</p>
+        <input id="bikeRegNoInput" placeholder="Enter Your Registration Number" class="form-control" />
+        <button type="button" onclick="searchFullDetails()" class="btn btn-info mt-3" style="padding-left:30%;padding-right:30%">Search</button>
+    </div>
+</div>
+
+<script>
+    function searchFullDetails() {
+        var bikeRegNoValue = document.getElementById("bikeRegNoInput").value;
+        location.href = '@Url.Action("FullDetails", "Home")?BikeRegNo=' + bikeRegNoValue;
+    }
+</script>
+
+
+    
+    

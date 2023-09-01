@@ -1,0 +1,193 @@
+﻿/* styles.css */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    /* Add any styles you need for the header */
+    margin-top:-5px
+}
+
+main {
+    flex: 1; /* Fill the remaining vertical space */
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+    margin-top: auto;
+}
+
+
+.background-image {
+    background-size: cover;
+    background-image: url('../images/d9cd18724134f5dc521ea340486d4a62.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    background-color: rgba(255, 255, 255, 0.3);
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+   
+.background-image-search {
+    background-size: cover;
+    background-image: url('../images/nqaliu.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0.9;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+/* Import Font Dancing Script */
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script);
+
+* {
+    margin: 0;
+}
+
+
+
+
+
+.title {
+    font-family: 'Dancing Script', cursive;
+    padding-top: 15px;
+    position: absolute;
+    left: 45%;
+}
+
+
+
+ 
+
+
+
+/* End */
+
+
+
+.profile {
+    margin-bottom: 20px;
+    margin-top: -12px;
+    text-align: center;
+}
+
+    .profile img {
+        border-radius: 50%;
+        box-shadow: 0px 0px 5px 1px grey;
+    }
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+.job {
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.url, hr {
+    text-align: center;
+}
+
+    .url hr {
+        margin-left: 20%;
+        width: 60%;
+    }
+
+    .url a {
+        color: #818181;
+        display: block;
+        font-size: 20px;
+        margin: 10px 0;
+        padding: 6px 8px;
+        text-decoration: none;
+    }
+
+        .url a:hover, .url .active {
+            background-color: #e8f5ff;
+            border-radius: 28px;
+            color: #000;
+            margin-left: 14%;
+            width: 65%;
+        }
+
+
+
+.main-body {
+    padding: 15px;
+}
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+    .gutters-sm > .col, .gutters-sm > [class*=col-] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+.mb-3, .my-3 {
+    margin-bottom: 1rem !important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.shadow-none {
+    box-shadow: none !important;
+}
+.nav-link:hover{
+    color:hotpink !important;
+    border:1px solid
+}
+#NavUserName:hover {
+    color:inherit !important;
+}

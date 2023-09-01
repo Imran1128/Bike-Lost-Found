@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LostAndFoundBikeInformation>
+@{
+    ViewData["Title"] = "MyList";
+}
+
+<div class="container">
+    <h1>My List</h1>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Bike Name</td>
+            <td>Bike Registration</td>
+            <td>Bike Serial No</td>
+        </tr>
+        </thead>
+        
+        @foreach (var Bikes in Model)
+        {
+        var UserId = User.FindFirst("Id").Value;
+        var CurrentId = Bikes.UserID;
+        if (UserId == CurrentId)
+        {
+        <tbody>
+        <th>@Bikes.BikeName</th>
+        <th>@Bikes.BikeRegNo</th>
+        <th>@Bikes.BikeSN</th>
+        @if (Bikes.IsFound)
+        {
+            <th class="fw-bolder text-danger">Bike is Found</th>
+        }
+        <th><a class="btn btn-primary" asp-action="FullDetails" asp-controller="Home" asp-route-BikeRegNo="@Bikes.BikeRegNo">View Full Details</a>
+            <a class="btn btn-info" asp-action="EditList" asp-controller="Profile" asp-route-BikeRegNo="@Bikes.BikeRegNo">Edit List</a>
+                    <a class="btn btn-danger" asp-action="DeleteBike" asp-controller="Home" asp-route-BikeRegNo="@Bikes.BikeRegNo">Delete</a>
+                </th>
+                
+
+        </tbody>
+
+        }
+
+        }
+
+    </table>
+</div>

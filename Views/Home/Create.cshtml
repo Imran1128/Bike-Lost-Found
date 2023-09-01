@@ -1,0 +1,68 @@
+﻿@model AddBikeViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="">
+    <div class="container">
+
+        <h1>Create New</h1>
+        <hr />
+        <form enctype="multipart/form-data" asp-controller="Home" asp-action="Create" method="post">
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <div>
+                <input asp-for="UserID" hidden="" value="@User.FindFirst("Id").Value" />
+            </div>
+            
+            <div>
+                <label class="form-label" asp-for="OwnerName"></label>
+                <input class="form-control" asp-for="OwnerName" />
+                <span class="text-danger" asp-validation-for="OwnerName"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="OwnerEmail"></label>
+                <input class="form-control" asp-for="OwnerEmail" />
+                <span class="text-danger" asp-validation-for="OwnerEmail"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="OwnerPhone"></label>
+                <input class="form-control" asp-for="OwnerPhone" />
+                <span class="text-danger" asp-validation-for="OwnerPhone"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="BikeName"></label>
+                <input class="form-control" asp-for="BikeName" />
+                <span class="text-danger" asp-validation-for="BikeName"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="BikeRegNo"></label>
+                <input class="form-control" asp-for="BikeRegNo" />
+                <span class="text-danger" asp-validation-for="BikeRegNo"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="BikeSN"></label>
+                <input class="form-control" asp-for="BikeSN" />
+                <span class="text-danger" asp-validation-for="BikeSN"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="PlaceWhereLost"></label>
+                <input class="form-control" asp-for="PlaceWhereLost" />
+                <span class="text-danger" asp-validation-for="PlaceWhereLost"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="BikePhoto"></label>
+                <input class="form-control-file" type="file" asp-for="BikePhoto" />
+                <span class="text-danger" asp-validation-for="BikePhoto"></span>
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+    </diy>
+</div>
+
+
+

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<LostAndFoundBikeInformation>
+@{
+    ViewData["Title"] = "FoundBikes";
+}
+<div class="bg-light">
+    <div class="container">
+        <h1 mt-2>Missing Bikes</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Bike Name</td>
+                <td>Bike Registration</td>
+                <td>Bike Serial No</td>
+            </tr>
+            </thead>
+            @foreach (var FoundBike in Model)
+            {
+                
+                <tbody>
+                <th>@FoundBike.BikeName</th>
+                <th>@FoundBike.BikeRegNo</th>
+                <th>@FoundBike.BikeSN</th>
+                @if (FoundBike.IsFound)
+                {
+                    <th class="fw-bolder text-danger">Bike is Found</th>
+                }
+                <th><a class="btn btn-primary" asp-action="FullDetails" asp-controller="Home" asp-route-BikeRegNo="@FoundBike.BikeRegNo">View Full Details</a></th>
+
+                </tbody>
+
+                
+
+            }
+
+        </table>
+
+    </div>
+</div>
+
+</div>

@@ -1,0 +1,67 @@
+﻿@model RegistrationViewModel
+@{
+    ViewData["Title"] = "Registration";
+}
+<div class ="container">
+<h1>Registration</h1>
+<hr />
+    <form enctype="multipart/form-data" method="post">
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+        
+    <div>
+        <label class="form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+   
+    <div>
+        <label class="form-label" asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label class="form-label" asp-for="PhoneNumber"></label>
+        <input class="form-control" asp-for="PhoneNumber" />
+        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+    </div>
+    <div>
+        <label class="form-label" asp-for="Address"></label>
+        <input class="form-control" asp-for="Address" />
+        <span class="text-danger" asp-validation-for="Address"></span>
+    </div>
+    <div>
+        <label class="form-label" asp-for="Gender"></label>
+        
+        <input class="form-check-inline" type="radio" asp-for="Gender" value="Male" />
+            <label >Male</label>
+        
+            
+        <input class=" form-check-inline " type="radio" asp-for="Gender" value="Female" />
+        <label>Female</label>
+            
+        
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label class="form-label" asp-for="Password"></label>
+        <input class="form-control" asp-for="Password" />
+        <span class="text-danger" asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <label class="form-label" asp-for="ConfirmPassword"></label>
+        <input class="form-control" asp-for="ConfirmPassword" />
+        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+    </div>
+    <div>
+        <label class="form-label" asp-for="Photo">Upload Photo</label>
+        <input class="form-control-file" asp-for="Photo" />
+        <span class="text-danger" asp-validation-for="Photo"></span>
+    </div>
+    <div class="mt-2">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a class="btn btn-danger" asp-action="Index" asp-controller="Home">Cancel</a>
+    </div>
+</form>
+</div>
+
