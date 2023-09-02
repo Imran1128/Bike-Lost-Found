@@ -178,3 +178,6 @@ footer {
 #NavUserName:hover {
     color:inherit !important;
 }
+#login-reg:hover{
+    border:inherit
+}

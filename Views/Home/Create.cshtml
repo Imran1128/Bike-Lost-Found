@@ -16,17 +16,17 @@
             
             <div>
                 <label class="form-label" asp-for="OwnerName"></label>
-                <input class="form-control" asp-for="OwnerName" />
+                <input class="form-control" asp-for="OwnerName" value="@User.FindFirst("Name").Value" />
                 <span class="text-danger" asp-validation-for="OwnerName"></span>
             </div>
             <div>
                 <label class="form-label" asp-for="OwnerEmail"></label>
-                <input class="form-control" asp-for="OwnerEmail" />
+                <input class="form-control" asp-for="OwnerEmail" value="@User.FindFirst("Email").Value" />
                 <span class="text-danger" asp-validation-for="OwnerEmail"></span>
             </div>
             <div>
                 <label class="form-label" asp-for="OwnerPhone"></label>
-                <input class="form-control" asp-for="OwnerPhone" />
+                <input class="form-control" asp-for="OwnerPhone" value="@User.FindFirst("PhoneNumber").Value" />
                 <span class="text-danger" asp-validation-for="OwnerPhone"></span>
             </div>
             <div>
