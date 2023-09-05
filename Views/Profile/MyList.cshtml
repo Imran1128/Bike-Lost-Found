@@ -10,9 +10,9 @@
     <table class="table">
         <thead>
         <tr>
-            <td>Bike Name</td>
-            <td>Bike Registration</td>
-            <td>Bike Serial No</td>
+            <th>Bike Name</th>
+            <th>Bike Registration</th>
+            <th>Bike Serial No</th>
         </tr>
         </thead>
         
@@ -23,17 +23,17 @@
         if (UserId == CurrentId)
         {
         <tbody>
-        <th>@Bikes.BikeName</th>
-        <th>@Bikes.BikeRegNo</th>
-        <th>@Bikes.BikeSN</th>
+        <td>@Bikes.BikeName</td>
+        <td>@Bikes.BikeRegNo</td>
+        <td>@Bikes.BikeSN</td>
         @if (Bikes.IsFound)
         {
-            <th class="fw-bolder text-danger">Bike is Found</th>
+            <td class="fw-bolder text-danger">Bike is Found</td>
         }
-        <th><a class="btn btn-primary" asp-action="FullDetails" asp-controller="Home" asp-route-BikeRegNo="@Bikes.BikeRegNo">View Full Details</a>
+        <td><a class="btn btn-primary" asp-action="FullDetails" asp-controller="Home" asp-route-BikeRegNo="@Bikes.BikeRegNo">View Full Details</a>
             <a class="btn btn-info" asp-action="EditList" asp-controller="Profile" asp-route-BikeRegNo="@Bikes.BikeRegNo">Edit List</a>
                     <a class="btn btn-danger" asp-action="DeleteBike" asp-controller="Home" asp-route-BikeRegNo="@Bikes.BikeRegNo">Delete</a>
-                </th>
+                </td>
                 
 
         </tbody>

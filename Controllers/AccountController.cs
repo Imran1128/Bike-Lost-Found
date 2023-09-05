@@ -150,7 +150,7 @@ namespace BikeLostAndFound.Controllers
                     ModelState.AddModelError("", "Email is not confirmed yet");
                     return View(model);
                 }
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, true);
                 if (result.Succeeded)
                     if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
                     {
@@ -161,7 +161,16 @@ namespace BikeLostAndFound.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 ModelState.AddModelError("", "Invalid Login Attemp");
+                if (user.LockoutEnd > DateTime.Now.AddMinutes(15))
+                {
+                    ModelState.AddModelError("","User is Blocked");
+                }
+                if (user.LockoutEnd <= DateTime.Now.AddMinutes(15))
+                {
+                    ModelState.AddModelError("", "User is Blocked for 15 minutes");
+                }
             }
+            
             return View();
         }
         public async Task<IActionResult> Logout()
@@ -314,6 +323,8 @@ namespace BikeLostAndFound.Controllers
                 var token = await userManager.GeneratePasswordResetTokenAsync(user);
                 var PasswordResetLink = Url.Action("ResetPassword", "Account",
                     new { Email = model.Email, token = token }, Request.Scheme);
+                Sendemail(model.Email, "Reset Password", PasswordResetLink,
+                    "Please verify your email address to reset password");
                 ViewBag.SuccessMessage = "If you  have any account with this email a password reset link has been sent to your email";
                 return View("~/Views/Success/Success.cshtml"); ;
             }
@@ -341,6 +352,11 @@ namespace BikeLostAndFound.Controllers
                 var result = await userManager.ResetPasswordAsync(user, model.token, model.Password);
                 if (result.Succeeded)
                 {
+                    var lockedOutTime = await userManager.GetLockoutEndDateAsync(user);
+                    if (lockedOutTime.HasValue && lockedOutTime.Value <= DateTime.Now.AddMinutes(15) )
+                    {
+                        await userManager.SetLockoutEndDateAsync(user, DateTime.Now);
+                    }
                     ViewBag.SuccessMessage = "Your Password is changed successfully";
                     return View("~/Views/Success/Success.cshtml"); ;
                 }

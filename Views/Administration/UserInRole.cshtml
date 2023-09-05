@@ -1,0 +1,34 @@
+﻿@model List<UserInRoleViewModel>
+@{
+    ViewData["Title"] = "User InRole";
+}
+
+<div class="container">
+    <form method="post">
+        <div class="card">
+
+            <div class="card-header">
+                <h1>Add or Remove User</h1>
+            </div>
+            
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                <div class="card-body m-2">
+                    <input hidden="" asp-for="@Model[i].UserID"/>
+                    <input hidden="" asp-for="@Model[i].UserName" />
+                    <input asp-for="@Model[i].IsSelected" type="checkbox" class="form-check-input"/>
+                    <label class="form-check-label" asp-for="@Model[i].IsSelected">@Model[i].UserName</label>
+                </div>
+                }
+           
+            <div class="card-footer mt-2">
+                <a class="btn btn-info" asp-action="EditRole">Cancel</a>
+                <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+        </div>
+        
+    </form>
+    
+
+</div>
+

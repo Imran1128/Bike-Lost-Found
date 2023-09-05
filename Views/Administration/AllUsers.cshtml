@@ -1,0 +1,50 @@
+﻿@using Microsoft.EntityFrameworkCore
+@inject UserManager<ApplicationUser> userManager
+@{
+    ViewData["Title"] = "AllUsers";
+}
+
+<div class="container">
+        <h1 >AllUsers</h1>
+        <hr />
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>User Email</th>
+        </tr>
+        </thead>
+        @{
+           var users = await userManager.Users.ToListAsync();
+        }
+        @foreach (var user in users)
+        {
+
+            <tbody>
+            <td>@user.Id</td>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+                @{
+                    var administrator = await userManager.IsInRoleAsync(user, "Administration");
+                }
+                @if (!(await userManager.IsInRoleAsync(user, "Admin")) && !(await userManager.IsInRoleAsync(user, "Administrator")) || User.IsInRole("Administrator"))
+            {
+                <td><a class="btn btn-danger" asp-action="DeleteUser" asp-controller="Administration" asp-route-Id="@user.Id">Delete</a></td>
+                @if (user.LockoutEnd > DateTime.Now)
+                {
+                    <td><a class="" asp-action="UnLockUser" asp-controller="Administration" asp-route-Id="@user.Id"><img style="width:12%" src="~/images/untitled1-removebg-preview.png" /></a></td>
+                }
+                else
+                {
+                    <td><a class="" asp-action="LockUser" asp-controller="Administration" asp-route-Id="@user.Id"><img style="width:15%" src="~/images/lock-icon-vector-illustration-removebg-preview.png" /></a></td>
+                }
+            }
+            
+            
+
+            </tbody>
+        }
+
+    </table>
+</div>

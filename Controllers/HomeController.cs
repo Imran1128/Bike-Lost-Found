@@ -117,6 +117,10 @@ namespace BikeLostAndFound.Controllers
         {
             var Bike = blfRepository.GetByReg(BikeRegNo);
             await blfRepository.DeleteByAsync(Bike);
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("LostBikes", "Home");
+            }
             return RedirectToAction("MyList", "Profile");
         }
 

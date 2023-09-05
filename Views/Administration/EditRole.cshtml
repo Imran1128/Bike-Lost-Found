@@ -1,0 +1,47 @@
+﻿@model EditRoleViewModel
+@{
+    ViewData["Title"] = "Edit Role";
+}
+
+<div class="container">
+
+    <h1>Edit Role</h1>
+    <hr/>
+    <form method="post">
+        <div>
+            
+            <input class="form-control" asp-for="Id" hidden="" />
+        </div>
+        <div>
+            <label class="form-label" asp-for="Name"></label>
+            <input class="form-control" asp-for="Name"  />
+        </div>
+        <div class="mt-2 ">
+            <button class="btn btn-primary" type="submit">Update</button>
+            <a class="btn btn-info" asp-action="AllRoles" asp-controller="Administration">Cancel</a>
+        </div>
+    </form>
+    
+    <div class="card mt-4">
+        <h1 class="card-header">Users in This Role</h1>
+        <hr />
+        <div class="card-body">
+            
+            @if (Model.Users.Any())
+            {
+                foreach (var user in Model.Users)
+                {
+                    <h2>@user</h2>
+                }
+            }
+            else
+            {
+                <h2>Currently there is no user in this role</h2>
+            }
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary" asp-action="UserInRole" asp-controller="Administration" asp-route-roleId="@Model.Id">Add or Remove User</a>
+        </div>
+    </div>
+</div>
+

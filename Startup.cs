@@ -33,9 +33,14 @@ namespace BikeLostAndFound
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddDbContextPool<MyDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("BLFDB")));
             services.AddScoped<IBikeLostAndFoundRepository, BikeLostAndFoundRepositoryBase>();
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                {
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+                })
             .AddEntityFrameworkStores<MyDbContext>()
             .AddDefaultTokenProviders();
+            
             services.AddAuthentication();
             services.AddAuthorization();
             services.ConfigureApplicationCookie(config => { config.LoginPath = "/Account/Login"; });

@@ -6,13 +6,44 @@
 <div class="container">
     <h1>AllRoles</h1>
     <hr/>
-    @foreach (var roles in Model)
+    @if (Model.Any())
+    {
+        <a class="btn btn-primary my-3" asp-action="CreateRole" asp-controller="Administration">Create New Role</a>
+
+        @foreach (var roles in Model)
+        {
+            <div class="card">
+                <div class="card-header">Role Id: @roles.Id</div>
+
+                <div class="card-body">
+                    <h3>Role Name: @roles.Name</h3>
+                </div>
+                <form method="post" >
+                    <a class="btn btn-info" asp-action="EditRole" asp-controller="Administration" asp-route-roleId="@roles.Id">Edit</a>
+                    <span id="confirmSpan_@roles.Id" style="display:none">
+                        <span>Are You Really Want To Delete The Role @roles.Name ?</span>
+                        <button asp-action="DeleteRole" asp-controller="Administration" asp-route-roleId="@roles.Id" class="btn btn-primary" type="submit">Yes</button>
+                        <a onclick="ConfirmDelete('@roles.Id',false)" href="#" class="btn btn-danger">No</a>
+                    </span>
+                    <span id="DeleteSpan_@roles.Id">
+                        <a  onclick="ConfirmDelete('@roles.Id',true)" href="#" class="btn btn-danger">Delete</a>
+                    </span>
+                </form>
+            </div>
+
+        }
+    }
+    else
     {
         <div class="card">
-            <div class="card-header">@roles.Id</div>
-        </div>
-        <div class="card-body">
-            <h3>@roles.Name</h3>
+            <div class="card-header"><h2>No Role Created Yet</h2></div>
+            <div class="card-body"><h4>Create New Role by the Button Bellow</h4></div>
+            <div class="card-footer"><a class="btn btn-primary " asp-action="CreateRole">Create New</a></div>
         </div>
     }
 </div>
+
+@section Scripts
+{
+    <script src="~/js/site.js"></script>
+}

@@ -9,23 +9,24 @@
         <table class="table">
             <thead>
             <tr>
-                <td>Bike Name</td>
-                <td>Bike Registration</td>
-                <td>Bike Serial No</td>
+                <th>Bike Name</th>
+                <th>Bike Registration</th>
+                <th>Bike Serial No</th>
             </tr>
             </thead>
-            @foreach (var FoundBike in Model)
+            @foreach (var lostBikes in Model)
             {
                 
                 <tbody>
-                <th>@FoundBike.BikeName</th>
-                <th>@FoundBike.BikeRegNo</th>
-                <th>@FoundBike.BikeSN</th>
-                @if (FoundBike.IsFound)
+                <td>@lostBikes.BikeName</td>
+                <td>@lostBikes.BikeRegNo</td>
+                <td>@lostBikes.BikeSN</td>
+                @if (lostBikes.IsFound)
                 {
-                    <th class="fw-bolder text-danger">Bike is Found</th>
+                    <td class="fw-bolder text-danger">Bike is Found</td>
                 }
-                <th><a class="btn btn-primary" asp-action="FullDetails" asp-controller="Home" asp-route-BikeRegNo="@FoundBike.BikeRegNo">View Full Details</a></th>
+                <td><a class="btn btn-primary" asp-action="FullDetails" asp-controller="Home" asp-route-BikeRegNo="@lostBikes.BikeRegNo">View Full Details</a></td>
+                <td><a class="btn btn-danger" asp-action="DeleteBike" asp-controller="Home" asp-route-BikeRegNo="@lostBikes.BikeRegNo">Delete</a></td>
 
                 </tbody>
 

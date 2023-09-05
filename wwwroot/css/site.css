@@ -27,10 +27,10 @@ footer {
 
 .background-image {
     background-size: cover;
-    background-image: url('../images/d9cd18724134f5dc521ea340486d4a62.jpg');
+    /*background-image: url('../images/d9cd18724134f5dc521ea340486d4a62.jpg');*/
+    background-image: url('../images/pexels-photo-1134204.jpg');
     background-repeat: no-repeat;
-    background-position: center;
-    
+    background-position:top;
     background-color: rgba(255, 255, 255, 0.3);
     min-height: 500px;
     display: flex;

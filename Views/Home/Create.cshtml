@@ -30,6 +30,11 @@
                 <span class="text-danger" asp-validation-for="OwnerPhone"></span>
             </div>
             <div>
+                <label class="form-label" asp-for="OwnerAddress"></label>
+                <input class="form-control" asp-for="OwnerAddress" value="@User.FindFirst("Address").Value" />
+                <span class="text-danger" asp-validation-for="OwnerAddress"></span>
+            </div>
+            <div>
                 <label class="form-label" asp-for="BikeName"></label>
                 <input class="form-control" asp-for="BikeName" />
                 <span class="text-danger" asp-validation-for="BikeName"></span>
