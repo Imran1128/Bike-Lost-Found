@@ -208,6 +208,8 @@ namespace BikeLostAndFound.Controllers
             var result =  userManager.Users;
             return View(result);
         }
+
+        
         public async Task<IActionResult> DeleteUser(string Id)
         {
             var user = await userManager.FindByIdAsync(Id);
