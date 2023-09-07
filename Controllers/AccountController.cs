@@ -11,6 +11,8 @@ using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using BikeLostAndFound.Interfaces;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.AspNetCore.DataProtection;
+using BikeLostAndFound.Data;
 
 namespace BikeLostAndFound.Controllers
 {
@@ -21,14 +23,16 @@ namespace BikeLostAndFound.Controllers
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly ILogger<AccountController> logger;
         private readonly IBikeLostAndFoundRepository blfRepository;
+        private readonly IDataProtector Protector;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IWebHostEnvironment webHostEnvironment, ILogger<AccountController> logger, IBikeLostAndFoundRepository BlfRepository)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IWebHostEnvironment webHostEnvironment, ILogger<AccountController> logger, IBikeLostAndFoundRepository BlfRepository,IDataProtectionProvider dataProtectionProvider, DataProtectionPurposeString dataProtectionPurposeString)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.webHostEnvironment = webHostEnvironment;
             this.logger = logger;
             blfRepository = BlfRepository;
+            Protector = dataProtectionProvider.CreateProtector(dataProtectionPurposeString.BikeRouteValue);
         }
 
         [HttpGet]
@@ -84,7 +88,7 @@ namespace BikeLostAndFound.Controllers
             return View(model);
         }
 
-        public async Task Sendemail(String RecieverEmail, string subject, string body,string message)
+        public async Task Sendemail(String RecieverEmail, string subject, string body, string message)
         {
             var mail = new MailMessage();
             mail.Subject = subject;
@@ -127,10 +131,10 @@ namespace BikeLostAndFound.Controllers
             var user = await userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                return Json(false); 
+                return Json(false);
             }
 
-            return Json(true); 
+            return Json(true);
         }
 
 
@@ -145,13 +149,22 @@ namespace BikeLostAndFound.Controllers
             if (ModelState.IsValid)
             {
                 var user = await userManager.FindByEmailAsync(model.Email);
-                if (user != null && !user.EmailConfirmed && (await userManager.CheckPasswordAsync(user, model.Password)))
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "User Not Found");
+                    return View(model);
+                }
+                
+                
+                else if (user != null && !user.EmailConfirmed && (await userManager.CheckPasswordAsync(user, model.Password)))
                 {
                     ModelState.AddModelError("", "Email is not confirmed yet");
                     return View(model);
                 }
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, true);
+                var userLockoutTime = await userManager.GetLockoutEndDateAsync(user);
                 if (result.Succeeded)
+                {
                     if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
                     {
                         return Redirect(ReturnUrl);
@@ -160,17 +173,28 @@ namespace BikeLostAndFound.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                ModelState.AddModelError("", "Invalid Login Attemp");
-                if (user.LockoutEnd > DateTime.Now.AddMinutes(15))
-                {
-                    ModelState.AddModelError("","User is Blocked");
+
                 }
-                if (user.LockoutEnd <= DateTime.Now.AddMinutes(15))
+
+                else if (result.IsLockedOut && userLockoutTime > DateTime.Now.AddMinutes(15))
+                {
+                    ModelState.AddModelError("", "User is Blocked");
+                }
+
+                else if (result.IsLockedOut && userLockoutTime <= DateTime.Now.AddMinutes(15))
                 {
                     ModelState.AddModelError("", "User is Blocked for 15 minutes");
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid Login Attempt");
+                }
+
+
+
+
             }
-            
+
             return View();
         }
         public async Task<IActionResult> Logout()
@@ -215,10 +239,11 @@ namespace BikeLostAndFound.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateUser(string Id)
         {
+            var decryptedId = Protector.Unprotect(Id);
             var CurrentUser = User.FindFirst("Id").Value;
-            if (Id == CurrentUser)
+            if (decryptedId == CurrentUser)
             {
-                var user = await userManager.FindByIdAsync(Id);
+                var user = await userManager.FindByIdAsync(decryptedId);
 
                 if (user == null)
                 {
@@ -353,7 +378,7 @@ namespace BikeLostAndFound.Controllers
                 if (result.Succeeded)
                 {
                     var lockedOutTime = await userManager.GetLockoutEndDateAsync(user);
-                    if (lockedOutTime.HasValue && lockedOutTime.Value <= DateTime.Now.AddMinutes(15) )
+                    if (lockedOutTime.HasValue && lockedOutTime.Value <= DateTime.Now.AddMinutes(15))
                     {
                         await userManager.SetLockoutEndDateAsync(user, DateTime.Now);
                     }

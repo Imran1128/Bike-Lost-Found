@@ -25,6 +25,7 @@ namespace BikeLostAndFound.Data
             Identity.AddClaim(new Claim("Email", user.Email ?? ""));
             Identity.AddClaim(new Claim("PhoneNumber", user.PhoneNumber ?? ""));
             Identity.AddClaim(new Claim("Id", user.Id ?? ""));
+            Identity.AddClaim(new Claim("EncryptedId", user.EncryptedId ?? ""));
             return Identity;
         }
     }

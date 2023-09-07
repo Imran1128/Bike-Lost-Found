@@ -181,3 +181,8 @@ footer {
 #login-reg:hover{
     border:inherit
 }
+.disabled-link {
+    pointer-events: none; 
+    opacity: 0.5; 
+   
+}

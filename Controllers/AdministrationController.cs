@@ -16,13 +16,13 @@ namespace BikeLostAndFound.Controllers
     [Authorize(Roles = "Admin,Administrator")]
     public class AdministrationController : Controller
     {
-        
+
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBikeLostAndFoundRepository _blfRepository;
         private readonly MyDbContext _myDbContext;
 
-        public AdministrationController(Microsoft.AspNetCore.Identity.RoleManager<IdentityRole> roleManager , UserManager<ApplicationUser> userManager, IBikeLostAndFoundRepository blfRepository,MyDbContext myDbContext)
+        public AdministrationController(Microsoft.AspNetCore.Identity.RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, IBikeLostAndFoundRepository blfRepository, MyDbContext myDbContext)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
@@ -32,7 +32,7 @@ namespace BikeLostAndFound.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> AllRoles()
         {
-            var result =  roleManager.Roles;
+            var result = roleManager.Roles;
             return View(result);
         }
         [Authorize(Roles = "Administrator")]
@@ -57,7 +57,7 @@ namespace BikeLostAndFound.Controllers
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError("",error.Description);
+                        ModelState.AddModelError("", error.Description);
                     }
                 }
             }
@@ -105,12 +105,12 @@ namespace BikeLostAndFound.Controllers
                 var result = await roleManager.UpdateAsync(role);
                 if (result.Succeeded)
                 {
-                   return RedirectToAction("AllRoles");
+                    return RedirectToAction("AllRoles");
                 }
 
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError("",error.Description);
+                    ModelState.AddModelError("", error.Description);
                 }
             }
             return View(model);
@@ -205,11 +205,11 @@ namespace BikeLostAndFound.Controllers
         [HttpGet]
         public async Task<IActionResult> AllUsers()
         {
-            var result =  userManager.Users;
+            var result = userManager.Users;
             return View(result);
         }
 
-        
+
         public async Task<IActionResult> DeleteUser(string Id)
         {
             var user = await userManager.FindByIdAsync(Id);
@@ -227,7 +227,7 @@ namespace BikeLostAndFound.Controllers
                     return RedirectToAction("AllUsers");
                 }
             }
-            
+
             return RedirectToAction("AllUsers");
         }
 
@@ -244,8 +244,8 @@ namespace BikeLostAndFound.Controllers
             {
                 await userManager.SetLockoutEndDateAsync(user, DateTime.Now.AddYears(2000));
             }
-           
-          
+
+
             return RedirectToAction("AllUsers");
         }
         public async Task<IActionResult> UnLockUser(string Id)
@@ -260,8 +260,8 @@ namespace BikeLostAndFound.Controllers
             {
                 await userManager.SetLockoutEndDateAsync(user, DateTime.Now);
             }
-            
-           
+
+
             return RedirectToAction("AllUsers");
         }
     }

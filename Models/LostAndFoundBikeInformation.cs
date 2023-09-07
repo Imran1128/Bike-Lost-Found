@@ -1,17 +1,22 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BikeLostAndFound.Models
 {
     public class LostAndFoundBikeInformation
     {
         public int Id { get; set; }
+        [NotMapped]
+        public string EncryptedId { get; set; }
         public string UserID { get; set; }
         [Required]
         [Display(Name = "Bike Name")]
         public string BikeName { get; set; }
         [Display(Name = "Bike Registration No")]
         public string BikeRegNo { get; set;}
+        [NotMapped]
+        public string EncryptedBikeRegNo { get; set; }
         [Display(Name = "Bike Sn")]
         public string BikeSN { get; set; }
         [Required]

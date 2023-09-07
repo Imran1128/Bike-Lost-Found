@@ -45,6 +45,7 @@ namespace BikeLostAndFound
             services.AddAuthorization();
             services.ConfigureApplicationCookie(config => { config.LoginPath = "/Account/Login"; });
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimPrincipalFactory>();
+            services.AddSingleton<DataProtectionPurposeString>();
 
         }
 

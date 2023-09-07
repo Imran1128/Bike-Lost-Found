@@ -13,6 +13,9 @@
         <hr />
         <form enctype="multipart/form-data" asp-action="EditList" asp-controller="Profile" method="post">
             <div class="text-danger" asp-validation-summary="All"></div>
+            <div>
+                <input asp-for="Id" hidden=""/>
+            </div>
         <div>
             <label class="form-label" asp-for="OwnerName"></label>
             <input class="form-control" asp-for="OwnerName" />

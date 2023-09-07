@@ -9,6 +9,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using BikeLostAndFound.Data;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Linq;
 
 namespace BikeLostAndFound.Controllers
 {
@@ -18,11 +22,13 @@ namespace BikeLostAndFound.Controllers
     {
         private readonly IBikeLostAndFoundRepository blfRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly IDataProtector Protector;
 
-        public HomeController(IBikeLostAndFoundRepository blfRepository, IWebHostEnvironment webHostEnvironment)
+        public HomeController(IBikeLostAndFoundRepository blfRepository, IWebHostEnvironment webHostEnvironment,IDataProtectionProvider dataProtectionProvider,DataProtectionPurposeString dataProtectionPurposeString)
         {
             this.blfRepository = blfRepository;
             this.webHostEnvironment = webHostEnvironment;
+            Protector = dataProtectionProvider.CreateProtector(dataProtectionPurposeString.BikeRouteValue);
         }
         public IActionResult Index()
         {
@@ -74,21 +80,20 @@ namespace BikeLostAndFound.Controllers
             }
             return View();
         }
-        [HttpGet]
         public async Task<IActionResult> LostBikes()
         {
 
-            try
-            {
-                var result = await blfRepository.GetAll();
-                return View(result);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                throw;
-            }
+            var bikes = await blfRepository.GetAll();
+                var result = bikes.Select(e =>
+                {
+                    e.EncryptedId = Protector.Protect(e.Id.ToString());
+                    return e;
+                });
+
+            return View(result);
+            
         }
+
 
         public async Task<IActionResult> FoundBikes()
         {
@@ -96,9 +101,10 @@ namespace BikeLostAndFound.Controllers
             var result = await blfRepository.GetAll();
             return View(result);
         }
-        public IActionResult FullDetails(string BikeRegNo)
+        public async Task<IActionResult> FullDetails(string BikeId)
         {
-            var Bike = blfRepository.GetByReg(BikeRegNo);
+            int deCryptedId = Convert.ToInt32(Protector.Unprotect(BikeId));
+            var Bike =await blfRepository.FindByIdAsync(deCryptedId);
             if (Bike == null)
             {
                 ViewBag.ErrorTitle = "Bike not Found";
