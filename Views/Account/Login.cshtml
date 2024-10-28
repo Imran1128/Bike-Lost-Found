@@ -6,30 +6,40 @@
 <div class="container">
     <h1>Login</h1>
     <hr />
-    <form method="post" >
+    <form method="post">
+        <!-- Validation summary -->
         <div class="text-danger" asp-validation-summary="All"></div>
+
+        <!-- Email input -->
         <div>
             <label class="form-label" asp-for="Email"></label>
             <input class="form-control" asp-for="Email" />
             <span class="text-danger" asp-validation-for="Email"></span>
         </div>
+
+        <!-- Password input -->
         <div>
             <label class="form-label" asp-for="Password"></label>
             <input class="form-control" asp-for="Password" />
             <span class="text-danger" asp-validation-for="Password"></span>
         </div>
+
+        <!-- Remember Me checkbox -->
         <div class="mt-2">
-            
             <input class="form-check" type="checkbox" asp-for="RememberMe" />
             <label class="form-label" asp-for="RememberMe"></label>
-            
         </div>
+
+        <!-- ReturnUrl hidden field -->
+        <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
+
+        <!-- Submit and Cancel buttons -->
         <div class="mt-2">
             <button class="btn btn-primary" type="submit">Login</button>
             <a asp-action="Index" asp-controller="Home" class="btn btn-danger">Cancel</a>
         </div>
-
     </form>
+
+    <!-- Forgot Password link -->
     <a class="mt-2 text-decoration-none" asp-action="ForgetPassword" asp-controller="Account">Forgot Password?</a>
 </div>
-

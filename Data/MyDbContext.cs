@@ -11,5 +11,6 @@ namespace BikeLostAndFound.Data
             
         }
         DbSet<LostAndFoundBikeInformation> lostAndFoundBikeInformation { get; set; }
+        DbSet<BikeAdvertisement> bikeAdvertisements { get; set; }
     }
 }

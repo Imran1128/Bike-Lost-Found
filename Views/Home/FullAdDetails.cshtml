@@ -1,0 +1,141 @@
+﻿@model FullAdViewModel
+@{
+    ViewData["Title"] = "Full Details";
+    var BikePhoto = "~/Images/" + Model.bikeAdvertisement.BikePhoto;
+}
+<div class="container">
+    <div class="main-body">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home</a></li>
+                <li class="breadcrumb-item"><a asp-action="MyAdList" asp-controller="Home">My Ad List</a></li>
+                <li class="breadcrumb-item"><a asp-action="FullAdDetails">FullAdDetails</a></li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumb -->
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="@BikePhoto" alt="User"  width="100%" asp-append-version="true">
+                            <div class="mt-1">
+                                <h4>@Model.bikeAdvertisement.Model</h4>
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h1 class="fw-bolder">Bike's Information</h1>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Brand</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.bikeAdvertisement.Brand
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Registration Number</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.bikeAdvertisement.BikeRegNo
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Model</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.bikeAdvertisement.Model
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Kilometers Run</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.bikeAdvertisement.KilometersRun
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Engine Capacity</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.bikeAdvertisement.EngineCapacity
+                            </div>
+                            
+                        </div>
+                        <hr>
+                        <h1 class="fw-bolder">Owner's Information</h1>
+                        <hr />
+                        
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Owner's Name'</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.bikeAdvertisement.OwnerName
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Owner's Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <i class="fa-solid fa-envelope pr-1"></i>@Model.bikeAdvertisement.OwnerEmail
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Owner's Phone Number</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <i class="fa-solid fa-phone pr-1"></i>@Model.bikeAdvertisement.OwnerPhone
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Owner's Address</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <i class="fa-solid fa-address-book pr-1"></i>@Model.bikeAdvertisement.OwnerAddress
+                            </div>
+
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

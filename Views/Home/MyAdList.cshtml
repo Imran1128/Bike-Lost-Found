@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BikeAdvertisement>
+@{
+    ViewData["Title"] = "MyAdList";
+}
+
+<div class="container">
+    <h1>My Advertisement List</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Kilometers Run</th>
+            </tr>
+        </thead>
+
+        @foreach (var Bikes in Model)
+        {
+            var UserId = User.FindFirst("Id").Value;
+            var CurrentId = Bikes.UserID;
+            if (UserId == CurrentId)
+            {
+                <tbody>
+                <td>@Bikes.Brand</td>
+                <td>@Bikes.Model</td>
+                <td>@Bikes.KilometersRun</td>
+                  
+                <td>
+                    <a class="btn btn-primary" asp-action="FullAdDetails" asp-controller="Home" asp-route-BikeId="@Bikes.Id">View Full Details</a>
+                    <a class="btn btn-info" asp-action="EditAdList" asp-controller="Home" asp-route-BikeId="@Bikes.Id">Edit AD</a>
+                    <a class="btn btn-danger" asp-action="DeleteBikeAd" asp-controller="Home" asp-route-BikeRegNo="@Bikes.BikeRegNo">Delete</a>
+                </td>
+
+
+                </tbody>
+
+            }
+
+        }
+
+    </table>
+</div>

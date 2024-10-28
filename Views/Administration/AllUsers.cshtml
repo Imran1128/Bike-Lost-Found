@@ -6,7 +6,7 @@
 
 <div class="container">
     <h1>Manage Users</h1>
-        <hr />
+    <hr />
     <table class="table">
         <thead>
         <tr>
@@ -16,7 +16,7 @@
         </tr>
         </thead>
         @{
-           var users = await userManager.Users.ToListAsync();
+            var users = await userManager.Users.ToListAsync();
         }
         @foreach (var user in users)
         {
@@ -25,10 +25,10 @@
             <td>@user.Name</td>
             <td>@user.UserName</td>
             <td>@user.Email</td>
-                @{
-                    var administrator = await userManager.IsInRoleAsync(user, "Administration");
-                }
-                @if (!(await userManager.IsInRoleAsync(user, "Admin")) && !(await userManager.IsInRoleAsync(user, "Administrator")) || User.IsInRole("Administrator"))
+            @{
+                var administrator = await userManager.IsInRoleAsync(user, "Administration");
+            }
+            @if (!(await userManager.IsInRoleAsync(user, "Admin")) && !(await userManager.IsInRoleAsync(user, "Administrator")) || User.IsInRole("Administrator"))
             {
                 <td><a class="btn btn-danger " asp-action="DeleteUser" asp-controller="Administration" asp-route-Id="@user.Id">Delete</a></td>
                 @if (user.LockoutEnd > DateTime.Now)
@@ -40,18 +40,18 @@
                     <td><a class="" asp-action="LockUser" asp-controller="Administration" asp-route-Id="@user.Id"><img style="width:15%;" src="~/images/lock-icon-vector-illustration-removebg-preview.png" /></a></td>
                 }
             }
+            else
+            {
+                <td><a class="btn btn-danger disabled" asp-action="DeleteUser" asp-controller="Administration" asp-route-Id="@user.Id">Delete</a></td>
+                @if (user.LockoutEnd > DateTime.Now)
+                {
+                    <td><a class="disabled-link" asp-action="UnLockUser" asp-controller="Administration" asp-route-Id="@user.Id"><img style="width:10%" src="~/images/untitled1-removebg-preview.png" /></a></td>
+                }
                 else
                 {
-                    <td><a class="btn btn-danger disabled" asp-action="DeleteUser" asp-controller="Administration" asp-route-Id="@user.Id">Delete</a></td>
-                    @if (user.LockoutEnd > DateTime.Now)
-                    {
-                    <td><a class="disabled-link" asp-action="UnLockUser" asp-controller="Administration" asp-route-Id="@user.Id"><img style="width:10%" src="~/images/untitled1-removebg-preview.png" /></a></td>
-                    }
-                    else
-                    {
                     <td><a class="disabled-link" asp-action="LockUser" asp-controller="Administration" asp-route-Id="@user.Id"><img style="width:15%;" src="~/images/lock-icon-vector-illustration-removebg-preview.png" /></a></td>
-                    }
                 }
+            }
             
             
 
@@ -60,3 +60,4 @@
 
     </table>
 </div>
+

@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace BikeLostAndFound.Repository
 {
-    public class BikeLostAndFoundRepositoryBase:BaseRepository<LostAndFoundBikeInformation>,IBikeLostAndFoundRepository
+    public class BikeAdvertisementRepository : BaseRepository<BikeAdvertisement>, IBikeAdvertisement
     {
         private readonly MyDbContext myDbContext;
 
-        public BikeLostAndFoundRepositoryBase(MyDbContext myDbContext) : base(myDbContext)
+        public BikeAdvertisementRepository(MyDbContext myDbContext) : base(myDbContext)
         {
             this.myDbContext = myDbContext;
         }

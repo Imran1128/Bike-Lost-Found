@@ -1,5 +1,7 @@
 ﻿using BikeLostAndFound.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace BikeLostAndFound.Interfaces
@@ -15,7 +17,7 @@ namespace BikeLostAndFound.Interfaces
         Task<bool> UpdateRangeByAsync(IEnumerable<TEntity> entities);
         Task<bool> DeleteByAsync(TEntity entity);
         Task<bool> DeleteRangeByAsync(IEnumerable<TEntity> entities);
-        
+        Task<TEntity> GetSingleData(Expression<Func<TEntity, bool>> Condition);
 
     }
 }

@@ -37,6 +37,26 @@ namespace BikeLostAndFound.Controllers
         }
         [Authorize(Roles = "Administrator")]
         [HttpGet]
+        public IActionResult AllRolesAPI()
+        {
+            var result = roleManager.Roles;
+            if (result != null)
+            {
+                return Json(result);
+            }
+            else
+            {
+                return BadRequest("Roles Not available");
+            }
+            
+        }
+        [HttpGet]
+        public IActionResult AllRolesApiGet()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Administrator")]
+        [HttpGet]
         public async Task<IActionResult> CreateRole()
         {
             return View();
@@ -89,7 +109,6 @@ namespace BikeLostAndFound.Controllers
             }
             return View(model);
         }
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {

@@ -12,23 +12,23 @@
 
         @foreach (var roles in Model)
         {
-            <div class="card">
-                <div class="card-header">Role Id: @roles.Id</div>
-
-                <div class="card-body">
+            <div class="card mb-2">
+              
+                <div class="card-body ">
                     <h3>Role Name: @roles.Name</h3>
                 </div>
+
                 <form method="post" >
-                    <a class="btn btn-info" asp-action="EditRole" asp-controller="Administration" asp-route-roleId="@roles.Id">Edit</a>
-                    <span id="confirmSpan_@roles.Id" style="display:none">
-                        <span>Are You Really Want To Delete The Role @roles.Name ?</span>
-                        <button asp-action="DeleteRole" asp-controller="Administration" asp-route-roleId="@roles.Id" class="btn btn-primary" type="submit">Yes</button>
-                        <a onclick="ConfirmDelete('@roles.Id',false)" href="#" class="btn btn-danger">No</a>
-                    </span>
-                    <span id="DeleteSpan_@roles.Id">
-                        <a  onclick="ConfirmDelete('@roles.Id',true)" href="#" class="btn btn-danger">Delete</a>
-                    </span>
-                </form>
+        <a class="btn btn-info" asp-action="EditRole" asp-controller="Administration" asp-route-roleId="@roles.Id">Edit</a>
+        <span id="confirmSpan_@roles.Id" style="display:none">
+        <span>Are You Really Want To Delete The Role @roles.Name ?</span>
+        <button asp-action="DeleteRole" asp-controller="Administration" asp-route-roleId="@roles.Id" class="btn btn-primary" type="submit">Yes</button>
+        <a onclick="ConfirmDelete('@roles.Id',false)" href="#" class="btn btn-danger">No</a>
+        </span>
+        <span id="DeleteSpan_@roles.Id">
+        <a  onclick="ConfirmDelete('@roles.Id',true)" href="#" class="btn btn-danger">Delete</a>
+        </span>
+        </form>
             </div>
 
         }
@@ -47,3 +47,4 @@
 {
     <script src="~/js/site.js"></script>
 }
+

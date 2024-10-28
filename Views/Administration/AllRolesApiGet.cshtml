@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "AllRolesAPI";
+}
+
+
+<h1>AllRolesAPI</h1>
+<h2 id="id"></h2>
+<h2 id="name"></h2>
+
+<script>
+  
+        function Request() {
+            $.ajax({
+                url: "/Administration/AllRolesAPI",
+                method: "GET",
+                success: function (data) {
+                    data = JSON.parse(data);
+                    $("#id").text(data.id);
+                    $("#name").text(data.name);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error); // Log any errors
+                }
+            });
+        }
+
+    $(document).ready(function () {
+        Request();
+    });
+
+
+</script>
+
+

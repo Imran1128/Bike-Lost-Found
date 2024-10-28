@@ -122,7 +122,7 @@ namespace BikeLostAndFound.Controllers
             {
                 return View();
             }
-            ViewBag.ErrorMessage = "Email cannot be confirmed";
+            ViewBag.ErrorMessage = $"Email {user.Email} cannot be confirmed";
             return View("~/Views/Error/Error.cshtml");
         }
         [AcceptVerbs("Get", "Post")]
@@ -154,15 +154,16 @@ namespace BikeLostAndFound.Controllers
                     ModelState.AddModelError("", "User Not Found");
                     return View(model);
                 }
-                
-                
-                else if (user != null && !user.EmailConfirmed && (await userManager.CheckPasswordAsync(user, model.Password)))
+
+                if (!user.EmailConfirmed && (await userManager.CheckPasswordAsync(user, model.Password)))
                 {
                     ModelState.AddModelError("", "Email is not confirmed yet");
                     return View(model);
                 }
+
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, true);
                 var userLockoutTime = await userManager.GetLockoutEndDateAsync(user);
+
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
@@ -173,30 +174,24 @@ namespace BikeLostAndFound.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-
                 }
-
-                else if (result.IsLockedOut && userLockoutTime > DateTime.Now.AddMinutes(15))
+                else if (result.IsLockedOut)
                 {
-                    ModelState.AddModelError("", "User is Blocked");
-                }
-
-                else if (result.IsLockedOut && userLockoutTime <= DateTime.Now.AddMinutes(15))
-                {
-                    ModelState.AddModelError("", "User is Blocked for 15 minutes");
+                    ModelState.AddModelError("", userLockoutTime > DateTime.Now.AddMinutes(15) ?
+                        "User is Blocked" :
+                        "User is Blocked for 15 minutes");
                 }
                 else
                 {
                     ModelState.AddModelError("", "Invalid Login Attempt");
                 }
-
-
-
-
             }
 
-            return View();
+            // Re-populate the ReturnUrl in case it was null or if ModelState is invalid
+            ViewData["ReturnUrl"] = ReturnUrl;
+            return View(model);
         }
+
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();

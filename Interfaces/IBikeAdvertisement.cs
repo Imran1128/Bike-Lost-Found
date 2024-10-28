@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BikeLostAndFound.Interfaces
 {
-    public interface IBikeLostAndFoundRepository:IBaseService<LostAndFoundBikeInformation>
+    public interface IBikeAdvertisement : IBaseService<BikeAdvertisement>
     {
 
     }

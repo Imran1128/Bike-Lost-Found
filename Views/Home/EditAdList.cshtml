@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CreateAdViewModel
+
+@{
+    ViewData["Title"] = "Edit Advertisement";
+}
+
+
+<div class="container">
+
+    <h1>Edit Advertisement</h1>
+    <hr />
+    <form enctype="multipart/form-data" asp-controller="Home" asp-action="EditAdList" method="post">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div>
+            <input asp-for="UserID" hidden="" value="@User.FindFirst("Id").Value" />
+        </div>
+        <div>
+            <input asp-for="Id" hidden="" />
+        </div>
+
+        <div>
+            <label class="form-label" asp-for="OwnerName"></label>
+            <input class="form-control" asp-for="OwnerName" value="@User.FindFirst("Name").Value" />
+            <span class="text-danger" asp-validation-for="OwnerName"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="OwnerEmail"></label>
+            <input class="form-control" asp-for="OwnerEmail" value="@User.FindFirst("Email").Value" />
+            <span class="text-danger" asp-validation-for="OwnerEmail"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="OwnerPhone"></label>
+            <input class="form-control" asp-for="OwnerPhone" value="@User.FindFirst("PhoneNumber").Value" />
+            <span class="text-danger" asp-validation-for="OwnerPhone"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="OwnerAddress"></label>
+            <input class="form-control" asp-for="OwnerAddress" value="@User.FindFirst("Address").Value" />
+            <span class="text-danger" asp-validation-for="OwnerAddress"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="Brand"></label>
+            <input class="form-control" asp-for="Brand" />
+            <span class="text-danger" asp-validation-for="Brand"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="BikeRegNo"></label>
+            <input class="form-control" asp-for="BikeRegNo" />
+            <span class="text-danger" asp-validation-for="BikeRegNo"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="Model"></label>
+            <input class="form-control" asp-for="Model" />
+            <span class="text-danger" asp-validation-for="Model"></span>
+        </div>
+        <div>
+            <label class="form-label" asp-for="YearOfManufacture"></label>
+            <input class="form-control" asp-for="YearOfManufacture" />
+            <span class="text-danger" asp-validation-for="YearOfManufacture"></span>
+        </div>
+        <div>
+            <div>
+                <label class="form-label" asp-for="EngineCapacity"></label>
+                <input class="form-control" asp-for="EngineCapacity" />
+                <span class="text-danger" asp-validation-for="EngineCapacity"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="KilometersRun"></label>
+                <input class="form-control" asp-for="KilometersRun" />
+                <span class="text-danger" asp-validation-for="KilometersRun"></span>
+            </div>
+            <label class="form-label" asp-for="BikePhoto"></label>
+            <input class="form-control-file" type="file" asp-for="BikePhoto" />
+            <span class="text-danger" asp-validation-for="BikePhoto"></span>
+        </div>
+        <div class="mt-2">
+            <input class="btn btn-primary" type="submit" />
+            <a class="btn btn-primary" asp-action="MyAdList" asp-controller="Home">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+
+
+

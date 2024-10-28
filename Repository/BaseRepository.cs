@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BikeLostAndFound.Data;
 using BikeLostAndFound.Interfaces;
+using BikeLostAndFound.Migrations;
 using BikeLostAndFound.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -156,6 +158,19 @@ namespace CodeFirst.Repositories.Base
             return await _myDbContext.SaveChangesAsync();
         }
 
-        
+        public async Task<TEntity> GetSingleData(Expression<Func<TEntity, bool>> Condition)
+        {
+            try
+            {
+                _myDbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                var res = await _myDbContext.Set<TEntity>().FirstOrDefaultAsync(Condition);
+                return res;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

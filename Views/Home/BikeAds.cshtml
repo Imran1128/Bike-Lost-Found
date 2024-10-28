@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BikeAdvertisement>
+@{
+    ViewData["Title"] = "FoundBikes";
+}
+<div class="bg-light">
+    <div class="container">
+        <h1 mt-2>Bikes For Sale</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>KilometersRun</th>
+                <th>EngineCapacity</th>
+            </tr>
+            </thead>
+            @foreach (var bikeAds in Model)
+            {
+                
+                <tbody>
+                <td>@bikeAds.Brand</td>
+                <td>@bikeAds.Model</td>
+                <td>@bikeAds.KilometersRun</td>
+                <td>@bikeAds.EngineCapacity</td>
+                
+                <td><a class="btn btn-primary" asp-action="FullAdDetails" asp-controller="Home" asp-route-BikeId="@bikeAds.Id">View Full Details</a></td>
+                
+
+                </tbody>
+
+                
+
+            }
+
+        </table>
+
+    </div>
+</div>
+
+</div>
