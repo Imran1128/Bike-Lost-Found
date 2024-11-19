@@ -1,41 +1,42 @@
 ﻿@model IEnumerable<BikeAdvertisement>
 @{
-    ViewData["Title"] = "FoundBikes";
+    ViewData["Title"] = "Found Bikes";
 }
+
 <div class="bg-light">
     <div class="container">
-        <h1 mt-2>Bikes For Sale</h1>
+        <h1 class="mt-2">Bikes For Sale</h1>
 
         <table class="table">
             <thead>
-            <tr>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>KilometersRun</th>
-                <th>EngineCapacity</th>
-            </tr>
+                <tr>
+                    <th>Photo</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Kilometers Run</th>
+                    <th>Engine Capacity</th>
+                    <th>Action</th>
+                </tr>
             </thead>
-            @foreach (var bikeAds in Model)
-            {
-                
-                <tbody>
-                <td>@bikeAds.Brand</td>
-                <td>@bikeAds.Model</td>
-                <td>@bikeAds.KilometersRun</td>
-                <td>@bikeAds.EngineCapacity</td>
-                
-                <td><a class="btn btn-primary" asp-action="FullAdDetails" asp-controller="Home" asp-route-BikeId="@bikeAds.Id">View Full Details</a></td>
-                
-
-                </tbody>
-
-                
-
-            }
-
+            <tbody>
+                @foreach (var bikeAds in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="card" style="width: 75px;">
+                                <img src="@Url.Content("~/Images/" + bikeAds.BikePhoto)" alt="@bikeAds.Model" class="img-fluid" asp-append-version="true" />
+                            </div>
+                        </td>
+                        <td>@bikeAds.Brand</td>
+                        <td>@bikeAds.Model</td>
+                        <td>@bikeAds.KilometersRun</td>
+                        <td>@bikeAds.EngineCapacity</td>
+                        <td>
+                            <a class="btn btn-primary" asp-action="FullAdDetails" asp-controller="Home" asp-route-BikeId="@bikeAds.Id">View Full Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
-
     </div>
-</div>
-
 </div>

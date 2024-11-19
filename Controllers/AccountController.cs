@@ -162,12 +162,15 @@ namespace BikeLostAndFound.Controllers
                 }
 
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, true);
+                user.LastloginDate = DateTimeOffset.UtcNow;
+                await userManager.UpdateAsync(user);
                 var userLockoutTime = await userManager.GetLockoutEndDateAsync(user);
 
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
                     {
+                        
                         return Redirect(ReturnUrl);
                     }
                     else

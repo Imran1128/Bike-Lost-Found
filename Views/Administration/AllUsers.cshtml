@@ -1,5 +1,7 @@
 ﻿@using Microsoft.EntityFrameworkCore
-@inject UserManager<ApplicationUser> userManager
+@inject  UserManager<ApplicationUser> userManager
+@model IEnumerable<ApplicationUser>
+
 @{
     ViewData["Title"] = "Manage Users";
 }
@@ -18,13 +20,14 @@
         @{
             var users = await userManager.Users.ToListAsync();
         }
-        @foreach (var user in users)
+        @foreach (var user in Model)
         {
 
             <tbody>
             <td>@user.Name</td>
             <td>@user.UserName</td>
             <td>@user.Email</td>
+            <td>@user.LastloginDate</td>
             @{
                 var administrator = await userManager.IsInRoleAsync(user, "Administration");
             }

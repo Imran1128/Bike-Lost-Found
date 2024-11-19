@@ -74,12 +74,32 @@
                 <input class="form-control" asp-for="KilometersRun" />
                 <span class="text-danger" asp-validation-for="KilometersRun"></span>
             </div>
+            <div>
+                <label class="form-label" asp-for="Price"></label>
+                <input class="form-control" asp-for="Price" />
+                <span class="text-danger" asp-validation-for="Price"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="ChassisNumber"></label>
+                <input class="form-control" asp-for="ChassisNumber" />
+                <span class="text-danger" asp-validation-for="ChassisNumber"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="EngineNumber"></label>
+                <input class="form-control" asp-for="EngineNumber" />
+                <span class="text-danger" asp-validation-for="EngineNumber"></span>
+            </div>
+            <div>
+                <label class="form-label" asp-for="Description"></label>
+                <textarea class="form-control" asp-for="Description"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
             <label class="form-label" asp-for="BikePhoto"></label>
             <input class="form-control-file" type="file" asp-for="BikePhoto" />
             <span class="text-danger" asp-validation-for="BikePhoto"></span>
         </div>
         <div class="mt-2">
-            <input class="btn btn-primary" type="submit" />
+            <button class="btn btn-primary" type="submit" >Submit</button>
             <a class="btn btn-primary" asp-action="MyAdList" asp-controller="Home">Cancel</a>
         </div>
 

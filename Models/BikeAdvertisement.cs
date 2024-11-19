@@ -41,6 +41,18 @@ namespace BikeLostAndFound.Models
             public string BikePhoto { get; set; }
         [Display(Name = "Bike Registration No")]
         public string BikeRegNo { get; set; }
+        [Required]
+        [Display(Name = "Engine Number")]
+        public string EngineNumber { get; set; }
+        [Required]
+        [Display(Name = "Chassis Number")]
+        public string ChassisNumber { get; set; }
+        [Required]
+        [Display(Name = "Price")]
+        public string Price { get; set; }
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
 
 
 

@@ -10,6 +10,7 @@ using System.Linq;
 using BikeLostAndFound.Data;
 using BikeLostAndFound.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace BikeLostAndFound.Controllers
 {
@@ -221,12 +222,16 @@ namespace BikeLostAndFound.Controllers
             return RedirectToAction("EditRole");
         }
 
-        [HttpGet]
         public async Task<IActionResult> AllUsers()
         {
-            var result = userManager.Users;
+            var result = await userManager.Users
+                .OrderByDescending(u => u.LastloginDate)  
+                .ToListAsync();
+
             return View(result);
         }
+
+
 
 
         public async Task<IActionResult> DeleteUser(string Id)

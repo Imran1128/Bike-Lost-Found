@@ -181,6 +181,10 @@ namespace BikeLostAndFound.Controllers
         EngineCapacity = modell.EngineCapacity,
         YearOfManufacture = modell.YearOfManufacture,
         BikeRegNo = modell.BikeRegNo,
+        Price = modell.Price,
+        ChassisNumber = modell.ChassisNumber,
+        EngineNumber = modell.EngineNumber,
+        Description = modell.Description,
 
     };
     return (await _bikeAdvertisement.InsertByAsync(bikeAdvertisement)) ? RedirectToAction("MyAdList", "Home") : RedirectToAction("MyAdList", "Home");
@@ -260,7 +264,11 @@ namespace BikeLostAndFound.Controllers
                     YearOfManufacture = Bike.YearOfManufacture,
                     BikeRegNo = Bike.BikeRegNo,
                     ExistingPhoto = Bike.BikePhoto,
-                    
+                    Price = Bike.Price,
+                    ChassisNumber = Bike.ChassisNumber,
+                    EngineNumber = Bike.EngineNumber,
+                    Description = Bike.Description,
+
                 };
                 return View(modell);
             }
@@ -295,6 +303,10 @@ namespace BikeLostAndFound.Controllers
                     bikeAdvertisement.KilometersRun = modell.KilometersRun;
                     bikeAdvertisement.EngineCapacity = modell.EngineCapacity;
                     bikeAdvertisement.YearOfManufacture = modell.YearOfManufacture;
+                    bikeAdvertisement.Price = modell.Price;
+                    bikeAdvertisement.ChassisNumber = modell.ChassisNumber;
+                    bikeAdvertisement.EngineNumber = modell.EngineNumber;
+                    bikeAdvertisement.Description = modell.Description;
                     if (modell.BikePhoto != null)
                     {
                         bikeAdvertisement.BikePhoto = FileUploadProcess(modell);

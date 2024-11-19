@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace BikeLostAndFound.ViewModels
@@ -14,5 +15,6 @@ namespace BikeLostAndFound.ViewModels
         public string Password { get; set; }
         [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }
+        public DateTime Lastlogin { get; set; }
     }
 }
